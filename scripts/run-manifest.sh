@@ -7,4 +7,4 @@ MANIFEST_DIR=$DIR/../docker/volumes/code/environments/production/manifests
 mkdir -p $MANIFEST_DIR
 cp $MANIFEST_FILE $MANIFEST_DIR
 
-docker exec -it puppetagent puppet agent -tv
+docker exec -it puppetagent puppet agent -tv --logdest /agent-data/output.json

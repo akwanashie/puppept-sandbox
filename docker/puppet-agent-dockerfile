@@ -5,7 +5,8 @@ COPY --chown=root:root zscaler.pem /etc/pki/ca-trust/source/anchors/
 RUN update-ca-trust && \
   yum -y update && \
   rpm -Uvh https://yum.puppet.com/puppet6-release-el-7.noarch.rpm && \
-  yum install puppet-agent -y
+  yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
+  yum -y install puppet-agent jq
 
 ENV PATH="/opt/puppetlabs/bin:${PATH}"
 
