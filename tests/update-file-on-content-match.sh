@@ -59,21 +59,21 @@ function do-nothing-when-file-already-contains-replacement-line {
   sh $DIR/../scripts/run-manifest.sh $DIR/../manifests/update-file-on-content-match.pp
 
   # then
-  NOTICE_COUNT=$(count-sucessful-notices $DIR/../docker/volumes/agent-data/output.json)
-  
-  # cleanup
-  echo $NOTICE_COUNT
-  rm -rf $DIR/../docker/volumes/agent-data/output.json
+  NOTICE_COUNT=$((count-sucessful-notices))
 
   if [[ $NOTICE_COUNT -eq 0 ]]; then
-      echo "${FUNCNAME[0]} - passed!"
+    echo "${FUNCNAME[0]} - passed!"
+    # cleanup
+    rm -rf $DIR/../docker/volumes/agent-data/output.json
   else
-      echo "${FUNCNAME[0]} - failed!"
-      exit 1
+    echo "${FUNCNAME[0]} - failed!"
+    # cleanup
+    rm -rf $DIR/../docker/volumes/agent-data/output.json
+    exit 1
   fi
 }
 
 # run the tests
-# replace-line-when-file-contains-starting-line
-# do-nothing-when-file-does-not-exist
+replace-line-when-file-contains-starting-line
+do-nothing-when-file-does-not-exist
 do-nothing-when-file-already-contains-replacement-line
